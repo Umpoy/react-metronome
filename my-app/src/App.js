@@ -12,7 +12,12 @@ class App extends Component {
       beatsPerMeasure: 4
     };
   }
-  
+
+  handleBPMChange = event => {
+    const bpm = event.target.value;
+    this.setState({ bpm });
+  }
+
   render() {
     const { playing, bpm } = this.state;
 
@@ -20,7 +25,7 @@ class App extends Component {
       <div className="metroname">
         <div className="bpm-slider">
           <div>{bpm} BPM</div>
-          <input type="range" min="60" max="240" value={bpm} />
+          <input type="range" min="60" max="240" value={bpm} onChange={this.handleBPMChange} />
         </div>
         <button>{playing ? 'Stop' : 'Start'}</button>
       </div>
