@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
+import './assets/css/App.css';
+import click1 from './assets/sounds/click1.wav';
+import click2 from './assets/sounds/click2.wav';
 
 class App extends Component {
   constructor(props) {
