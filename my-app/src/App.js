@@ -2,9 +2,20 @@ import React, { Component } from 'react';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      playing: false,
+      count: 0,
+      bpm: 100,
+      beatsPerMeasure: 4
+    };
+  }
+  
   render() {
-    let bpm = 100;
-    let playing = false;
+    const { playing, bpm } = this.state;
+
     return (
       <div className="metroname">
         <div className="bpm-slider">
