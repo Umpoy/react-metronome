@@ -13,11 +13,18 @@ class App extends Component {
       bpm: 100,
       beatsPerMeasure: 4
     };
+
+    this.click1 = new Audio(click1);
+    this.click2 = new Audio(click2);
   }
 
   handleBPMChange = event => {
     const bpm = event.target.value;
     this.setState({ bpm });
+  }
+
+  sound = () => {
+    this.click1.play();
   }
 
   render() {
@@ -30,7 +37,8 @@ class App extends Component {
           <input type="range" min="60" max="240" value={bpm} onChange={this.handleBPMChange} />
         </div>
         <button>{playing ? 'Stop' : 'Start'}</button>
-      </div>
+        <button onClick={this.sound}></button>
+      </div >
     )
   }
 }
