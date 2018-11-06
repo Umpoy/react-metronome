@@ -23,9 +23,40 @@ class App extends Component {
     this.setState({ bpm });
   }
 
-  sound = () => {
-    this.click1.play();
+  clickSound = () => {
+    if (this.state.playing) {
+      clearInterval(this.timer);
+      this.setState({
+        playing: false
+      });
+    } else {
+      this.timer = setInterval(
+        this.playClick,
+        (60 / this.state.bpm) * 1000
+      );
+      this.setState(
+        {
+          count: 0,
+          playing: true
+        },
+        this.playClick
+      );
+    }
   }
+
+  playClick = () => {
+    const { count, beatsPerMeasure } = this.state;
+
+    if (count % beatsPerMeasure === 0) {
+      this.click2.play();
+    } else {
+      this.click1.play();
+    }
+
+    this.setState(state => ({
+      count: (state.count + 1) % state.beatsPerMeasure
+    }));
+  };
 
   render() {
     const { playing, bpm } = this.state;
@@ -36,8 +67,7 @@ class App extends Component {
           <div>{bpm} BPM</div>
           <input type="range" min="60" max="240" value={bpm} onChange={this.handleBPMChange} />
         </div>
-        <button>{playing ? 'Stop' : 'Start'}</button>
-        <button onClick={this.sound}></button>
+        <button onClick={this.clickSound}>{playing ? 'Stop' : 'Start'}</button>
       </div >
     )
   }
